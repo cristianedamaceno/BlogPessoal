@@ -40,10 +40,25 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
+	
+	// Primeiro Método Construtor - Com os Atributos
+	
+        public Usuario(long id, String nome, String usuario, String senha) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.usuario = usuario;
+		this.senha = senha;
+	}
+        
+        // Segundo Método Construtor - Sem Atributos
+        
+        public Usuario() { }
 
 	public long getId() {
 		return id;
 	}
+	
 
 	public void setId(long id) {
 		this.id = id;
@@ -89,6 +104,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 		this.postagem = postagem;
 	}
 	
+    }
 	
-
-}
+	
