@@ -16,21 +16,24 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-    @Entity
-    @Table(name = "tb_usuarios")
-    public class Usuario {
-	
+import io.swagger.v3.oas.annotations.media.Schema;
+
+@Entity
+@Table(name = "tb_usuarios")
+public class Usuario {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
-	
+	private Long id;
+
 	@NotNull(message = "O atributo Nome é Obrigatório!")
 	private String nome;
-	
+
+	@Schema(example = "email@email.com.br")
 	@NotNull(message = "O atributo Usuário é Obrigatório!")
 	@Email(message = "O atributo Usuário deve ser um email válido!")
 	private String usuario;
-	
+
 	@NotBlank(message = "O atributo Senha é Obrigatório!")
 	@Size(min = 8, message = "A Senha deve ter no mínimo 8 caracteres")
 	private String senha;
@@ -41,26 +44,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 	@JsonIgnoreProperties("usuario")
 	private List<Postagem> postagem;
 	
-	// Primeiro Método Construtor - Com os Atributos
 	
-        public Usuario(long id, String nome, String usuario, String senha) {
-		
+	public Usuario(Long id, String nome, String usuario, String senha) {
 		this.id = id;
 		this.nome = nome;
 		this.usuario = usuario;
 		this.senha = senha;
 	}
-        
-        // Segundo Método Construtor - Sem Atributos
-        
-        public Usuario() { }
-
-	public long getId() {
+	
+	public Usuario() { }
+	
+	public Long getId() {
 		return id;
 	}
-	
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -103,7 +101,5 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 	public void setPostagem(List<Postagem> postagem) {
 		this.postagem = postagem;
 	}
-	
-    }
-	
-	
+
+}

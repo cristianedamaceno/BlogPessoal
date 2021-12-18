@@ -19,13 +19,15 @@ import br.org.generation.blogpessoal.model.Usuario;
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UsuarioRepositoryTest {
-
+    
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
 	@BeforeAll
 	void start(){
 
+		usuarioRepository.deleteAll();
+		
 		usuarioRepository.save(new Usuario(0L, "João da Silva", "joao@email.com.br", "13465278"));
 		
 		usuarioRepository.save(new Usuario(0L, "Manuela da Silva", "manuela@email.com.br", "13465278"));
@@ -35,7 +37,7 @@ public class UsuarioRepositoryTest {
         usuarioRepository.save(new Usuario(0L, "Paulo Antunes", "paulo@email.com.br", "13465278"));
 
 	}
-	
+
 	@Test
 	@DisplayName("Retorna 1 usuario")
 	public void deveRetornarUmUsuario() {
@@ -43,7 +45,7 @@ public class UsuarioRepositoryTest {
 		Optional<Usuario> usuario = usuarioRepository.findByUsuario("joao@email.com.br");
 		assertTrue(usuario.get().getUsuario().equals("joao@email.com.br"));
 	}
-	
+
 	@Test
 	@DisplayName("Retorna 3 usuarios")
 	public void deveRetornarTresUsuarios() {
@@ -57,4 +59,3 @@ public class UsuarioRepositoryTest {
 	}
 
 }
-

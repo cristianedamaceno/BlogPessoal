@@ -22,17 +22,17 @@ import org.springframework.http.ResponseEntity;
 import br.org.generation.blogpessoal.model.Usuario;
 import br.org.generation.blogpessoal.service.UsuarioService;
 
- 	@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
- 	@TestInstance(TestInstance.Lifecycle.PER_CLASS)
- 	@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
- 	public class UsuarioControllerTest {
-	
+@SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+public class UsuarioControllerTest {
+
 	@Autowired
 	private TestRestTemplate testRestTemplate;
-	
+
 	@Autowired
 	private UsuarioService usuarioService;
-	
+
 	@Test
 	@Order(1)
 	@DisplayName("Cadastrar Um Usuário")
@@ -101,10 +101,9 @@ import br.org.generation.blogpessoal.service.UsuarioService;
 
 		ResponseEntity<String> resposta = testRestTemplate
 			.withBasicAuth("root", "root")
-			.exchange("/usuarios/all", HttpMethod.GET, null, String.class);
+			.exchange("/usuarios/listar", HttpMethod.GET, null, String.class);
 
 		assertEquals(HttpStatus.OK, resposta.getStatusCode());
 	}
 
 }
-	
